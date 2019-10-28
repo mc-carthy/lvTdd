@@ -1,3 +1,5 @@
+Input = require('src.utils.input')
+
 local Paddle = {}
 
 local speed = 250
