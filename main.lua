@@ -10,7 +10,7 @@ end
 
 function love.update(dt)
     updateKeyboardMouse()
-    print(keysDown['a'])
+    print(mouseDown[1])
 end
 
 function love.draw()
@@ -27,6 +27,7 @@ end
 
 function love.mousepressed(x, y, button, isTouch)
     mousePressed[button] = true
+    mouseDown[button] = true
 end
 
 function updateKeyboardMouse()
@@ -35,12 +36,11 @@ function updateKeyboardMouse()
             keysDown[k] = false
         end
     end
-    -- TODO: Implement the below
-    -- for k, v in pairs(mouseDown) do
-    --     if not love.mouse.isDown(k) then
-    --         mouseDown[k] = false
-    --     end
-    -- end
+    for k, v in pairs(mouseDown) do
+        if not love.mouse.isDown(k) then
+            mouseDown[k] = false
+        end
+    end
     keysPressed = {}
     mousePressed = {}
 end
