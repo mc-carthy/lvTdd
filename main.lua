@@ -1,46 +1,18 @@
-keysPressed = {}
-keysDown = {}
-mousePressed = {}
-mouseDown = {}
-
+Input = require('src.utils.input')
+local Paddle = require('src.entities.paddle')
 
 function love.load()
-
+    paddle1 = Paddle:init{
+        x = 20, y = 0
+    }
 end
 
 function love.update(dt)
-    updateKeyboardMouse()
-    print(mouseDown[1])
+    Input.readInput()
+    paddle1:update(dt)
+    Input.clearInput()
 end
 
 function love.draw()
-
-end
-
-function love.keypressed(key)
-    keysPressed[key] = true
-    keysDown[key] = true
-    if key == 'escape' then
-        love.event.quit()
-    end
-end
-
-function love.mousepressed(x, y, button, isTouch)
-    mousePressed[button] = true
-    mouseDown[button] = true
-end
-
-function updateKeyboardMouse()
-    for k, v in pairs(keysDown) do
-        if not love.keyboard.isDown(k) then
-            keysDown[k] = false
-        end
-    end
-    for k, v in pairs(mouseDown) do
-        if not love.mouse.isDown(k) then
-            mouseDown[k] = false
-        end
-    end
-    keysPressed = {}
-    mousePressed = {}
+    paddle1:draw()
 end
