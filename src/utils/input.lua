@@ -28,20 +28,14 @@ end
 
 function Input.clearInput()
     keysPressed = {}
+    keysDown = {}
     mousePressed = {}
+    mouseDown = {}
 end
 
-function love.keypressed(key)
-    keysPressed[key] = true
-    keysDown[key] = true
-    if key == 'escape' then
-        love.event.quit()
-    end
-end
-
-function love.mousepressed(x, y, button, isTouch)
-    mousePressed[button] = true
-    mouseDown[button] = true
+function Input.setKeyDown(key, boo)
+    if boo == nil then boo = true end
+    keysDown[key] = boo
 end
 
 return Input

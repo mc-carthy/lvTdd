@@ -1,5 +1,5 @@
 Input = require('src.utils.input')
-local Paddle = require('src.entities.paddle')
+Paddle = require('src.entities.paddle')
 
 function love.load()
     paddle1 = Paddle:init{
@@ -15,4 +15,15 @@ end
 
 function love.draw()
     paddle1:draw()
+end
+
+function love.keypressed(key)
+    Input.setKeyDown(key)
+    if key == 'escape' then
+        love.event.quit()
+    end
+end
+
+function love.mousepressed(x, y, button, isTouch)
+    -- Input.setMouseDown(button)
 end
