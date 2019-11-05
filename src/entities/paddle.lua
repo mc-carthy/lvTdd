@@ -28,9 +28,10 @@ function Paddle:update(dt)
         self.y = self.y - speed * dt
     end
 end
-
+-- luacov: disable
 function Paddle:draw()
     love.graphics.rectangle('fill', self.x, self.y, size.x, size.y)
 end
+-- luacov: enable
 
 return Paddle
