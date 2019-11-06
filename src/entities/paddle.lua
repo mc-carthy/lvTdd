@@ -1,3 +1,4 @@
+CONST = require('src.utils.constants')
 Input = require('src.utils.input')
 
 local Paddle = {}
@@ -13,6 +14,7 @@ function Paddle:init(params)
 
     inst.x = params.x or 0
     inst.y = params.y or 0
+    inst.size = size
 
     inst.update = self.update
     inst.draw = self.draw
@@ -26,6 +28,12 @@ function Paddle:update(dt)
     end
     if Input.keyDown('up') then
         self.y = self.y - speed * dt
+    end
+    if self.y < 0 then
+        self.y = 0
+    end
+    if self.y + self.size.y > CONST.SCREEN.HEIGHT then
+        self.y = CONST.SCREEN.HEIGHT - self.size.y
     end
 end
 -- luacov: disable
