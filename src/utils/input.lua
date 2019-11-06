@@ -28,9 +28,7 @@ end
 
 function Input.clearInput()
     keysPressed = {}
-    keysDown = {}
     mousePressed = {}
-    mouseDown = {}
 end
 
 function Input.setKeyDown(key, boo)
