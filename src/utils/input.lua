@@ -36,4 +36,8 @@ function Input.setKeyDown(key, boo)
     keysDown[key] = boo
 end
 
+function Input.setKeyPressed(key)
+    keysPressed[key] = true
+end
+
 return Input

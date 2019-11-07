@@ -19,6 +19,7 @@ end
 
 function love.keypressed(key)
     Input.setKeyDown(key)
+    Input.setKeyPressed(key)
     if key == 'escape' then
         love.event.quit()
     end
