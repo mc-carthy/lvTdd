@@ -26,9 +26,19 @@ function Input.readInput()
     end
 end
 
-function Input.clearInput()
+function Input.clearPressed()
     keysPressed = {}
     mousePressed = {}
+end
+
+function Input.clearDown()
+    keysDown = {}
+    mouseDown = {}
+end
+
+function Input.clearInput()
+    Input.clearPressed()
+    Input.clearDown()
 end
 
 function Input.setKeyDown(key, boo)
