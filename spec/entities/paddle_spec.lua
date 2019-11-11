@@ -18,18 +18,18 @@ describe('Paddle tests', function()
             paddle.x, paddle.y = 20, 20
             Input.clearInput()
         end)
-
+        
         it('should move down when the down key is pressed', function()
             local initialPaddleY = paddle.y
-            Input.setKeyDown('down', true)
+            Input.setKeyDown('down')
             paddle:update(0.01)
             local finalPaddleY = paddle.y
             assert.is_true(finalPaddleY > initialPaddleY, "Paddle has not moved down, initial y position: " .. initialPaddleY .. ' - final y position: ' .. finalPaddleY)
         end)
-
+        
         it('should move up when the up key is pressed', function()
             local initialPaddleY = paddle.y
-            Input.setKeyDown('up', true)
+            Input.setKeyDown('up')
             paddle:update(0.01)
             local finalPaddleY = paddle.y
             assert.is_true(finalPaddleY < initialPaddleY, "Paddle has not moved up, initial y position: " .. initialPaddleY .. ' - final y position: ' .. finalPaddleY)
