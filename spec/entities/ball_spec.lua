@@ -24,8 +24,9 @@ describe('Ball tests #ball', function()
             local dt = 1
             ball:update(dt)
             local finalBallPos = ball:getPos()
-            local distTravelled = Vector2:getMagnitude(finalBallPos - initialBallPos)
-            local direction = Vector2:angle(initialBallPos, finalBallPos)
+            local displacementVector = finalBallPos - initialBallPos
+            local distTravelled = displacementVector:getMagnitude()
+            local direction = displacementVector:getAngle()
             assert.is_equal(currentDirection, direction, "Expected direction to be " .. currentDirection .. ", actual angle was " .. direction)
             assert.is_equal(distTravelled, currentSpeed * dt, "Expected ball to travel " .. (currentSpeed * dt) .. ", ball actually travelled " .. distTravelled)
         end)
