@@ -19,15 +19,15 @@ describe('Ball tests #ball', function()
         
         it('should move in a straight line if not interrupted', function()
             local currentSpeed = ball:getSpeed()
-            local currentDirection = ball:getDirection()
+            local currentAngle = ball:getAngle()
             local initialBallPos = ball:getPos()
             local dt = 1
             ball:update(dt)
             local finalBallPos = ball:getPos()
             local displacementVector = finalBallPos - initialBallPos
             local distTravelled = displacementVector:getMagnitude()
-            local direction = displacementVector:getAngle()
-            assert.is_equal(currentDirection, direction, "Expected direction to be " .. currentDirection .. ", actual angle was " .. direction)
+            local angle = displacementVector:getAngle()
+            assert.is_equal(currentAngle, angle, "Expected angle to be " .. currentAngle .. ", actual angle was " .. angle)
             assert.is_equal(distTravelled, currentSpeed * dt, "Expected ball to travel " .. (currentSpeed * dt) .. ", ball actually travelled " .. distTravelled)
         end)
     end)

@@ -11,14 +11,15 @@ function Ball:init(params)
         x = params.x or CONST.SCREEN.WIDTH / 2,
         y = params.y or CONST.SCREEN.HEIGHT / 2
     }
-    inst.direction = params.direction or 0
+    inst.angle = params.angle or 0
     inst.speed = speed
 
     inst.update = self.update
     inst.draw = self.draw
 
     inst.setPos = self.setPos
-    inst.getDirection = self.getDirection
+    inst.setAngle = self.setAngle
+    inst.getAngle = self.getAngle
     inst.getSpeed = self.getSpeed
     inst.getPos = self.getPos
     inst.center = self.center
@@ -28,8 +29,8 @@ end
 
 function Ball:update(dt)
     local deltaPos = Vector2:init{
-        x = math.cos(self.direction) * self.speed * dt,
-        y = math.sin(self.direction) * self.speed * dt
+        x = math.cos(self.angle) * self.speed * dt,
+        y = math.sin(self.angle) * self.speed * dt
     }
 
     self:setPos(self:getPos() + deltaPos)
@@ -40,8 +41,8 @@ function Ball:draw()
     love.graphics.circle('fill', self.pos.x, self.pos.y, 10)
 end
 
-function Ball:getDirection()
-    return self.direction
+function Ball:getAngle()
+    return self.angle
 end
 
 function Ball:getSpeed()
@@ -60,6 +61,10 @@ function Ball:setPos(a, b)
         self.pos.x = a
         self.pos.y = b
     end
+end
+
+function Ball:setAngle(angle)
+    self.angle = angle
 end
 
 function Ball:center()
