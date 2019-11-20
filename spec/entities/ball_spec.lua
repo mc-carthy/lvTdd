@@ -38,5 +38,15 @@ describe('Ball tests #ball', function()
             ball:update(0.5)
             assert.is_true(ball:outOfBounds())
         end)
+
+        it('should bounce off the top boundary', function()
+            ball:setPos{ x = 10, y = 10 }
+            local initialVelocity = { x = 100, y = -100}
+            ball:setVelocity(initialVelocity)
+            ball:update(0.5)
+            local newVelocty = ball:getVelocity()
+            assert.is_true(math.abs(initialVelocity.x - newVelocty.x) < 0.001, "Expected x component of velocity to remain unchanged")
+            assert.is_true(math.abs(initialVelocity.y + newVelocty.y) < 0.001, "Expected y component of velocity to be inverted")
+        end)
     end)
 end)

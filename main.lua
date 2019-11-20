@@ -9,6 +9,7 @@ function love.load()
     ball = Ball:init{
         x = 20, y = 20
     }
+    ball:setAngle(math.random() * 2 * math.pi)
 end
 
 function love.update(dt)

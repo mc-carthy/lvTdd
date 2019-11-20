@@ -20,11 +20,17 @@ function Ball:init(params)
 
     inst.setPos = self.setPos
     inst.setAngle = self.setAngle
+    inst.setSpeed = self.setSpeed
+    inst.setVelocity = self.setVelocity
+    
+    inst.getPos = self.getPos
     inst.getAngle = self.getAngle
     inst.getSpeed = self.getSpeed
-    inst.getPos = self.getPos
+    inst.getVelocity = self.getVelocity
+
     inst.center = self.center
     inst.outOfBounds = self.outOfBounds
+    inst.checkForWallCollision = self.checkForWallCollision
 
     return inst
 end
@@ -36,6 +42,8 @@ function Ball:update(dt)
     }
 
     self:setPos(self:getPos() + deltaPos)
+
+    self:checkForWallCollision()
 end
 
 function Ball:draw()
@@ -49,6 +57,13 @@ end
 
 function Ball:getSpeed()
     return self.speed
+end
+
+function Ball:getVelocity()
+    return {
+        x = math.cos(self.angle) * self.speed,
+        y = math.sin(self.angle) * self.speed
+    }
 end
 
 function Ball:getPos()
@@ -70,6 +85,18 @@ function Ball:setAngle(angle)
     self.angle = angle
 end
 
+function Ball:setSpeed(speed)
+    self.speed = speed
+end
+
+function Ball:setVelocity(vel)
+    local speed = Vector2.getMagnitude(vel)
+    local angle = math.atan2(vel.y, vel.x)
+
+    self:setSpeed(speed)
+    self:setAngle(angle)
+end
+
 function Ball:center()
     self.pos.x = CONST.SCREEN.WIDTH / 2
     self.pos.y = CONST.SCREEN.HEIGHT / 2
@@ -85,6 +112,16 @@ function Ball:outOfBounds()
         return true
     else
         return false
+    end
+end
+
+function Ball:checkForWallCollision()
+    if (
+        self.pos.y < self.radius or
+        self.pos.y > (CONST.SCREEN.HEIGHT - self.radius)
+    ) then
+        local currentVel = self:getVelocity()
+        self:setVelocity(Vector2:init{ x = currentVel.x, y = -currentVel.y })
     end
 end
 
