@@ -13,6 +13,7 @@ function Ball:init(params)
     }
     inst.angle = params.angle or 0
     inst.speed = speed
+    inst.radius = params.radius or 10
 
     inst.update = self.update
     inst.draw = self.draw
@@ -23,6 +24,7 @@ function Ball:init(params)
     inst.getSpeed = self.getSpeed
     inst.getPos = self.getPos
     inst.center = self.center
+    inst.outOfBounds = self.outOfBounds
 
     return inst
 end
@@ -38,7 +40,7 @@ end
 
 function Ball:draw()
     love.graphics.setColor(1, 0, 1)
-    love.graphics.circle('fill', self.pos.x, self.pos.y, 10)
+    love.graphics.circle('fill', self.pos.x, self.pos.y, self.radius)
 end
 
 function Ball:getAngle()
@@ -50,13 +52,14 @@ function Ball:getSpeed()
 end
 
 function Ball:getPos()
-    return self.pos
+    return Vector2:init{ x = self.pos.x, y = self.pos.y }
 end
 
 function Ball:setPos(a, b)
     -- Assume a is vector, add explicit check here
     if b == nil then
-        self.pos = a
+        self.pos.x = a.x
+        self.pos.y = a.y
     else
         self.pos.x = a
         self.pos.y = b
@@ -68,8 +71,21 @@ function Ball:setAngle(angle)
 end
 
 function Ball:center()
-    self.x = CONST.SCREEN.WIDTH / 2
-    self.y = CONST.SCREEN.HEIGHT / 2
+    self.pos.x = CONST.SCREEN.WIDTH / 2
+    self.pos.y = CONST.SCREEN.HEIGHT / 2
+end
+
+function Ball:outOfBounds()
+    if 
+        (self.pos.x < (0 - self.radius) or
+        self.pos.x > (CONST.SCREEN.WIDTH + self.radius) or
+        self.pos.y < (0 - self.radius) or
+        self.pos.y > (CONST.SCREEN.HEIGHT + self.radius))
+    then
+        return true
+    else
+        return false
+    end
 end
 
 return Ball

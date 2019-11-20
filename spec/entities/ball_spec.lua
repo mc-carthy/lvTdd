@@ -30,5 +30,13 @@ describe('Ball tests #ball', function()
             assert.is_equal(currentAngle, angle, "Expected angle to be " .. currentAngle .. ", actual angle was " .. angle)
             assert.is_equal(distTravelled, currentSpeed * dt, "Expected ball to travel " .. (currentSpeed * dt) .. ", ball actually travelled " .. distTravelled)
         end)
+
+
+        it('should be destroyed if moved off screen', function()
+            ball:setPos{ x = 10, y = 10 }
+            ball:setAngle(-math.pi)
+            ball:update(0.5)
+            assert.is_true(ball:outOfBounds())
+        end)
     end)
 end)
